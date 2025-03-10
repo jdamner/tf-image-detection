@@ -1,0 +1,35 @@
+{
+  "name": "tf-image-detection",
+  "author": "James Amner<jdamner@me.com>",
+  "repository": {
+    "url": "https://github.com/jdamner/tf-image-detection"
+  },
+  "version": "1.0.0",
+  "scripts": {
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "start": "webpack serve --open"
+  },
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-cpu": "^4.22.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.22.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
