@@ -35,8 +35,8 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        static: join( __dirname, 'public' ),
-        hot: true
+        // static: join( __dirname, 'public' ),
+        // hot: true
     },
     plugins: [
         new HtmlWebpackPlugin({ title: 'Development' })

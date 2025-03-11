@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "es2022",
       "allowJs": true,
       "jsx": "react",
+      "module": "es2022",
       "moduleResolution": "node",
       "outDir": "./dist",
       "strict": true,
