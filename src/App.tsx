@@ -13,7 +13,7 @@ const App: React.FC = () => {
 
     useEffect( () => { 
         (async () => model.current = await cocoSsd.load({ base: 'mobilenet_v2' }) )();
-        (async () => video.current!.srcObject = await navigator.mediaDevices.getUserMedia({ video: true }) )()
+        (async () => video.current && ( video.current.srcObject = await navigator.mediaDevices.getUserMedia({ video: true }) ) )()
         animationFrame.current = requestAnimationFrame(detectElements);
         return () => cancelAnimationFrame( animationFrame.current! );
     }, [])
@@ -29,26 +29,29 @@ const App: React.FC = () => {
 
     return (
         <div className="container">
+            
             <h1>Video Detection Example</h1>
 
-            { foundElements
-                .filter( ( element ) => element.score > 0.5 )
-                .map( ( element, index ) => { 
-                return (
-                    <div key={index} style={{
-                        position: 'absolute',
-                        left: element.bbox[0] + 'px',
-                        top: element.bbox[1] + 'px',
-                        width: element.bbox[2] + 'px',
-                        height: element.bbox[3] + 'px',
-                    }}
-                    className="foundBox">
-                        <p>{element.class} - {Math.round( element.score * 100 )} % confidence</p>
-                    </div>
-                )
-            })}
+            <div className="videoContainer">
+                { foundElements
+                    .filter( ( element ) => element.score > 0.5 )
+                    .map( ( element, index ) => { 
+                    return (
+                        <div key={index} style={{
+                            position: 'absolute',
+                            left: element.bbox[0] + 'px',
+                            top: element.bbox[1] + 'px',
+                            width: element.bbox[2] + 'px',
+                            height: element.bbox[3] + 'px',
+                        }}
+                        className="foundBox">
+                            <p>{element.class} - {Math.round( element.score * 100 )} % confidence</p>
+                        </div>
+                    )
+                })}
 
-            <video ref={video} onLoadedData={detectElements} autoPlay muted width={640} height={480}/>
+                <video ref={video} onLoadedData={detectElements} autoPlay muted width={640} height={480}/>
+            </div>
         </div>
     );
 }
