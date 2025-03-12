@@ -16,13 +16,21 @@ const App: React.FC = () => {
   const [foundElements, setFoundElements] = useState<DetectedObject[]>([]);
 
   useEffect(() => {
-    (async () => (model.current = await load({ base: "mobilenet_v2" })))();
+    (async () => (model.current = await load()))();
     (async () =>
       video.current &&
       (video.current.srcObject = await navigator.mediaDevices.getUserMedia({
         video: true,
       })))();
-    return () => cancelAnimationFrame(animationFrame.current!);
+    return () => {
+      cancelAnimationFrame(animationFrame.current!);
+      model.current?.dispose();
+      if (video.current && video.current.srcObject) {
+        (video.current.srcObject as MediaStream)
+          .getTracks()
+          .forEach((track) => track.stop());
+      }
+    };
   }, []);
 
   const detectElements = () => {

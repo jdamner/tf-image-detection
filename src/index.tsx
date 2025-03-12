@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { Container, Grid2 as Grid, Card, CardContent } from "@mui/material";
+import { Container, Tab, TabList, TabPanel, Tabs } from "@mui/joy";
 
 import TFWebcamDetectApp from "./TF-Webcam-Detect";
 import WebLLMChatApp from "./WebLLM-Chat";
@@ -11,29 +11,23 @@ const root = createRoot(div);
 root.render(
   <Container>
     <h1>AI Examples</h1>
-    <Grid container gap={1}>
-      <Grid size={7}>
-        <Card>
-          <CardContent>
-            <h2>Video Detection</h2>
-            <p>Tensorflow.js Powered video detection using the COCO-SSD model.</p>
-            <TFWebcamDetectApp />
-          </CardContent>
-        </Card>
-        </Grid>
-        <Grid size={4}>
-      <Card>
-        <CardContent>
-          <h2>Chat</h2>
-          <p>
-            A simple-chatbot using the smallest AI model I can find! Powered by
-            WebLLM.
-          </p>
-          <WebLLMChatApp />
-        </CardContent>
-      </Card>
-      </Grid>
-    </Grid>
+    <Tabs defaultValue={0}>
+      <TabList>
+        <Tab>Chat</Tab>
+        <Tab>Video Detection</Tab>
+      </TabList>
+      <TabPanel value={0}>
+        <p>
+          A simple-chatbot using the an AI model of your choice! Powered by
+          WebLLM.
+        </p>
+        <WebLLMChatApp />
+      </TabPanel>
+      <TabPanel value={1}>
+        <p>Tensorflow.js Powered video detection using the COCO-SSD model.</p>
+        <TFWebcamDetectApp />
+      </TabPanel>
+    </Tabs>
   </Container>,
 );
 document.body.appendChild(div);
